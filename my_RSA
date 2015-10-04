@@ -1,0 +1,120 @@
+"""https://www.khanacademy.org/computing/computer-science/cryptography
+
+https://www.youtube.com/watch?v=qfgYfyyBRcY
+
+https://www.youtube.com/watch?v=kYasb426Yjk"""
+import prime_chooser
+import Sieve_of_Eratosthenes
+import compression
+import math
+
+p=int()
+q=int()
+e=int()
+d=int() #d= mod inverse of e
+n=int()
+phi=int()
+
+def make_pl():
+    """makes the primes list"""
+    primes_list=list(Sieve_of_Eratosthenes.sieve_using_set_and_ranges(100000))
+    primes_list.sort()
+    while primes_list[0]<math.log(n,2):
+        del(primes_list[0])
+    return primes_list
+
+def choose_primes_n_phi():
+    """this is totally good"""
+    global p
+    global q
+    global n
+    global phi
+    q=prime_chooser.prime_Chooser(2**124)
+    p=prime_chooser.prime_Chooser(2**120)
+    n=q*p
+    phi=((p-1)*(q-1))
+    return
+
+def extendedEuclid(a, b):
+    """return a tuple of three values: x, y and z, such that x is
+    the GCD of a and b, and x = y * a + z * b
+    https://www.youtube.com/watch?v=kYasb426Yjk"""
+    if a == 0:
+        return b, 0, 1
+    else:
+        g, y, x = extendedEuclid(b % a, a)
+        return g, x - (b // a) * y, y
+
+def gcd(a,b):
+    """totally good"""
+    if b==0:
+        return a
+    else:
+        return gcd(b,a%b)
+
+        
+    
+def find_k_d_e():
+    global k
+    global d
+    global e
+    primes_list=make_pl()
+    for i in primes_list:
+        if gcd((phi),i)==1:
+            e=i
+            x,y,z=extendedEuclid((phi), e)#x= gcd of a and b=y*a+z*b
+            if z>=0:
+                d=z
+            else:
+                d=phi+z 
+            return
+            
+    
+    return "wrong"
+
+def find_everything():
+    choose_primes_n_phi()
+    find_k_d_e()
+
+find_everything()
+    
+    
+
+def encrypt(m):
+    """takes a number m (message) and encrypts by raising it to e and taking
+it modulo m"""
+    c=pow(m,e,n)
+    return c
+
+def decrypt(c):
+    """takes and encrypted number (e) and decrypts it"""
+    m=pow(c,d,n)
+    return m
+def encrypt_elements_in_l(l):
+    k=0
+    for i in l:
+        try:
+            l[k]=encrypt(i)
+        except:
+            pass
+        k+=1
+    return l
+def decrypt_elements_in_l(l):
+    k=0
+    for i in l:
+        try:
+            l[k]=decrypt(i)
+        except:
+            pass
+        k+=1
+    return l
+def main():
+    t=input('give a string to encrypt without periods or caps')
+    d,l=compression.compress_LZ77(t)
+    l=encrypt_elements_in_l(l)
+    l=decrypt_elements_in_l(l)
+    t=compression.decompress_LZ77(l,d)
+    return t
+main()
+    
+
