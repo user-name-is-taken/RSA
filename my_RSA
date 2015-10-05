@@ -5,6 +5,7 @@ https://www.youtube.com/watch?v=qfgYfyyBRcY
 https://www.youtube.com/watch?v=kYasb426Yjk"""
 import prime_chooser
 import Sieve_of_Eratosthenes
+import compression
 import math
 
 p=int()
@@ -97,16 +98,17 @@ def convertToNumber (s):
 def convertFromNumber (n):
     """Thanks again poke"""
     return n.to_bytes(math.ceil(n.bit_length() / 8), 'little').decode()
-
+def decrypt_to_text(c):
+    d=decrypt(c)
+    t=convertFromNumber(d)
+    return t
 def rsa():
     t=input('give a string to encrypt')
     m=convertToNumber(t)
     c=encrypt(m)
     k=int(input('enter 0 to decrypt, enter 1 to return encrypted number'))
     if k==0:
-        print('0')
-        d=decrypt(c)
-        print(convertFromNumber(d))
+        print(decrypt_to_text(c))
         #print(s)
     elif k==1:
         return c
