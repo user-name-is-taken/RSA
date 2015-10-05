@@ -1,0 +1,40 @@
+import Sieve_of_Eratosthenes
+import Fermat_primes_tester
+
+def Rabin_Miller_primes_tester(p,a,m,k):
+    """uses the Rabin_miller method to test if a number is prime
+this is necessary because carmichael numbers will always fool the
+Fermat_primes_tester
+
+Returns False if composite, True if prime
+
+Code from: https://www.youtube.com/watch?v=qfgYfyyBRcY"""
+    c=p-1
+    b0=pow(a,m,p)
+
+    if b0==1 or b0==c: #only for b0
+        return True
+    bn=b0
+    while k>=1 and bn!=c and bn!=1:
+        k-=1
+        bn=pow(bn,2,p)
+    if bn==c:
+        return True
+    elif bn==1:
+        return False
+    else:
+        """ This case causes a lot of primes to be declared composite.
+For an explanation on this see:
+
+Trappe, W., & Washington, L. (2006).
+Introduction to cryptography: With coding theory (2nd ed.).
+Upper Saddle River, N.J.: Pearson Prentice Hall."""
+        return False
+
+def m_k(p):
+    """finds m and k where p-1=(2**k)*m"""
+    k=0
+    c=p-1
+    g=c
+    while g%2==0:
+        k+=1
