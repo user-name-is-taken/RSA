@@ -1,0 +1,27 @@
+import Sieve_of_Eratosthenes
+import random
+import Rabin_Miller_primes_tester
+import Fermat_primes_tester
+import math
+
+def prime_number_theorem(x):
+    """assumes a number x is prime (even if it's not
+and returns the expected distance to the next prime
+
+The average distance between primes less than x is given by ln(x)."""
+    return int((math.log(x)**2)//(math.log(x)-1))
+
+def prime_Chooser (keysize):
+    """Set to list for randomization of security keys.
+    This is not secure
+    because the dictionary will always be in the same order
+    given the same key size.
+
+    key size is the lower bound on the key size. the upper bound is the next order of magnitude up"""
+    
+    g=random.randrange(keysize,(keysize*10))
+    for i in range(g,g+(prime_number_theorem(g)*10)):
+        if Fermat_primes_tester.looped_primes_tester(i,99.99999):
+            if Rabin_Miller_primes_tester.m_r_loop(i):
+                return i
+    raise ValueError
