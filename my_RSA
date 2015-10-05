@@ -5,7 +5,6 @@ https://www.youtube.com/watch?v=qfgYfyyBRcY
 https://www.youtube.com/watch?v=kYasb426Yjk"""
 import prime_chooser
 import Sieve_of_Eratosthenes
-import compression
 import math
 
 p=int()
@@ -90,31 +89,28 @@ def decrypt(c):
     """takes and encrypted number (e) and decrypts it"""
     m=pow(c,d,n)
     return m
-def encrypt_elements_in_l(l):
-    k=0
-    for i in l:
-        try:
-            l[k]=encrypt(i)
-        except:
-            pass
-        k+=1
-    return l
-def decrypt_elements_in_l(l):
-    k=0
-    for i in l:
-        try:
-            l[k]=decrypt(i)
-        except:
-            pass
-        k+=1
-    return l
-def main():
-    t=input('give a string to encrypt without periods or caps')
-    d,l=compression.compress_LZ77(t)
-    l=encrypt_elements_in_l(l)
-    l=decrypt_elements_in_l(l)
-    t=compression.decompress_LZ77(l,d)
-    return t
-main()
-    
 
+def convertToNumber (s):
+    """http://stackoverflow.com
+/questions/31701991/string-of-text-to-unique-integer-method Thank you poke"""
+    return int.from_bytes(s.encode(), 'little')
+def convertFromNumber (n):
+    """Thanks again poke"""
+    return n.to_bytes(math.ceil(n.bit_length() / 8), 'little').decode()
+
+def rsa():
+    t=input('give a string to encrypt')
+    m=convertToNumber(t)
+    c=encrypt(m)
+    k=int(input('enter 0 to decrypt, enter 1 to return encrypted number'))
+    if k==0:
+        print('0')
+        d=decrypt(c)
+        print(convertFromNumber(d))
+        #print(s)
+    elif k==1:
+        return c
+if __name__ == '__main__':
+    rsa()
+    
+    
