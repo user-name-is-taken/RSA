@@ -6,12 +6,12 @@
 
 <center><h1>RSA</h1></center>
 <p1>
-  When main is called from my_RSA, this program will:<br>
+  When my_RSA is opened, this program will call rsa(). rsa() does the following:<br>
   prompt for a text input,<br>
   convert the text input to a number,<br>
   and encrypt the number.<br>
 <br>
-  Decrypt will decrypt a number,<br>
-  number_to_text_(n) will then convert numbers to text.<br>
+ Then it will ask if you want to decrypt or not.<br>
+  decrypt_to_text(c) will decrypt a number to text.
 </p1>
 
