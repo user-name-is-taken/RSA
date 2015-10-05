@@ -1,0 +1,11 @@
+import math
+
+def sieve_using_set_and_ranges(b):
+    """Thanks to Kevin J. Chase"""
+    seq_primes=list(range(2, b + 1))
+    sieve_set=set(range(2, b + 1))
+    for c in range(0, math.floor(math.sqrt(b)) + 1):
+        for k in range(c, math.floor(b / seq_primes[c]) + 1):
+            #print(seq_primes[k], seq_primes[c])
+            sieve_set.discard(seq_primes[k] * seq_primes[c])
+    return sieve_set
