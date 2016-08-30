@@ -5,7 +5,6 @@ https://www.youtube.com/watch?v=qfgYfyyBRcY
 https://www.youtube.com/watch?v=kYasb426Yjk"""
 import prime_chooser
 import Sieve_of_Eratosthenes
-import compression
 import math
 
 p=int()
