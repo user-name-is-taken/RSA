@@ -11,7 +11,7 @@ At most the chances of finding a bad a are 1/2.
 this means the probability of
 incorrectly callling a composite prime is at most .5^(number of as tried)
 
-the pow(x,y[,z]) operator which returns (x**y)%z (if a z i given else it gives x**y)
+the pow(x,y[,z]) operator which returns (x**y)%z (if a z is given else it gives x**y)
 
 for speeding up fermat's theorem on paper the following could be used:
 https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/modular-exponentiation"""
