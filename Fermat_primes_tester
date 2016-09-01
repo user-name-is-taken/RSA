@@ -7,7 +7,7 @@ Returns True if prime.
 Usually returns False is composite.
 
 Composites that return True need a different a.
-A most the chances of finding a bad a are 1/2.
+At most the chances of finding a bad a are 1/2.
 this means the probability of
 incorrectly callling a composite prime is at most .5^(number of as tried)
 
