@@ -1,6 +1,7 @@
 
 import Sieve_of_Eratosthenes
 import random
+
 def Fermat_Comp_Test(p,a):
     """uses Fermat's theorem to test if a number is prime
 Returns True if prime.
