@@ -15,7 +15,7 @@ n=int()
 phi=int()
 
 def make_pl():
-    """makes the primes list"""
+    """makes the primes list. Used in find_k_d_e()."""
     primes_list=list(Sieve_of_Eratosthenes.sieve_using_set_and_ranges(100000))
     primes_list.sort()
     while primes_list[0]<math.log(n,2):
@@ -61,7 +61,8 @@ def find_k_d_e():
     for i in primes_list:
         if gcd((phi),i)==1:
             e=i
-            x,y,z=extendedEuclid((phi), e)#x= gcd of a and b=y*a+z*b
+            x,y,z=extendedEuclid(phi, e)
+            #x= gcd of a and b=y*a+z*b
             if z>=0:
                 d=z
             else:
@@ -81,7 +82,7 @@ find_everything()
 
 def encrypt(m):
     """takes a number m (message) and encrypts by raising it to e and taking
-it modulo m"""
+it modulo n"""
     c=pow(m,e,n)
     return c
 
